@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 
 namespace VejleSygehus.Models {
-    public class Category {
+    public class Category
+    {
         public string Name { get; set; }
     }
 }
