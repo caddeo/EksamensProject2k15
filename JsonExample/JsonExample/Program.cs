@@ -42,7 +42,6 @@ namespace JsonExample
             Console.WriteLine("Skriv fil navn (uden .json)");
             path = Console.ReadLine();
 
-
             // deserialize JSON directly from a file
             using (StreamReader file = File.OpenText(@root + "\\" + path + ".json"))
             {
