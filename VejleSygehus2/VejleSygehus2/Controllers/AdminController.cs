@@ -15,9 +15,14 @@ namespace VejleSygehus2.Controllers
             return View(article);
         }
         [HttpPost]
-        public ActionResult Create(IArticle article)
+        public ActionResult Create(Article article)
         {
-            return View();
+            using (var db = new ArticleContext())
+            {
+                db.Articles.Add(article);
+                db.SaveChanges();
+            }
+            return RedirectToAction("List", "Article");
         }
     }
 }
