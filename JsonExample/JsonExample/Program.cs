@@ -37,7 +37,7 @@ namespace JsonExample
             Console.WriteLine("Skriv fil navn (uden .json)");
             string filename = Console.ReadLine();
 
-            // finder stien (og opretter den)
+            // finder stien (og opretter mappen hvis den ikke findes)
             string path = program.GetPath(filename);
 
             // Serializer objektet ( af typen produkt ) og
