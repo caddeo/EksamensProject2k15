@@ -34,18 +34,40 @@ namespace VejleSygehus2.Service
 
             return path;
         }
-        public void EditJson(int id)
+        public void EditJson(Article article)
         {
-            
+            string json = JsonConvert.SerializeObject(article, Formatting.Indented);
+            File.WriteAllText(article.Path, json);
         }
-        /*public Article LoadJson(int id)
+        public Article LoadJson(string path)
         {
+            Article deserializedArticle;
 
-            return 
-        }*/
-        public void DeleteJson(int id)
+            try
+            {
+                using (StreamReader file = File.OpenText(path))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    deserializedArticle = (Article)serializer.Deserialize(file, typeof(Article));
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                deserializedArticle = null;
+            }
+
+            return deserializedArticle;
+        }
+        public void DeleteJson(Article article)
         {
-            
+            try
+            {
+                File.Delete(article.Path);
+            }
+            catch (FileNotFoundException)
+            {
+
+            }
         }
     }
 }

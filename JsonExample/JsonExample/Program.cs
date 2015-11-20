@@ -48,6 +48,7 @@ namespace JsonExample
             // Viser alle filerne i mappen 
             // Kun lavet for at teste
             Console.WriteLine("Alle json filer i mappen:");
+            program.DeleteJson(path);
             // Ignorer - bare for at gøre så det mindre ligner et clusterfuck
             Console.WriteLine(path.Substring(0, (path.Length - (filename.Length+".json".Length))));
             Console.WriteLine(program.ListDirectory("json"));
@@ -59,6 +60,8 @@ namespace JsonExample
 
             // finder stien
             path = program.GetPath(filename);
+
+            
 
             // Finder filen og deserializer json om
             // til typen Produkt
@@ -131,9 +134,9 @@ namespace JsonExample
             return deserializedProduct;
         }
 
-        public void DeleteJson(string path, string filename)
+        public void DeleteJson(string path)
         {
-
+            File.Delete(path);
         }
 
         public string ListDirectory(string mappath)
