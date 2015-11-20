@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using VejleSygehus2.Database;
 using VejleSygehus2.Models;
 
 namespace VejleSygehus2.Controllers

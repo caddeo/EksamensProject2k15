@@ -1,6 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using VejleSygehus2.Models;
 
-namespace VejleSygehus2.Models
+namespace VejleSygehus2.Database
 {
     public class ArticleContext : DbContext
     {
@@ -13,7 +18,7 @@ namespace VejleSygehus2.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace VejleSygehus2.Models
 {
-    public class Article : IArticle
+    public class Article
     {
         public int Id { get; set; }
         public string Path { get; set; }
