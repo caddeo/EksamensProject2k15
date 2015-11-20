@@ -7,12 +7,12 @@
 <h2>List</h2>
 
 
-    @if (Request.IsAuthenticated && User.IsInRole("canEdit"))
-    {
-        <p>
-            @Html.ActionLink("Create New", "Create", "Admin")
-        </p>
-    }
+@if (Request.IsAuthenticated && User.IsInRole("canEdit"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", "Admin")
+    </p>
+}
 
 
 <table class="table">
@@ -26,25 +26,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Header)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @if (Request.IsAuthenticated && User.IsInRole("canEdit"))
-            {
-                Html.ActionLink("Edit", "Edit", "Admin", new {id = item.Id});
-                
-                Html.ActionLink("Delete", "Delete", "Admin", new {id = item.Id});
-            }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Header)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @if (Request.IsAuthenticated && User.IsInRole("canEdit"))
+                {
+                    Html.ActionLink("Edit", "Edit", "Admin", new {id = item.Id});
 
-            @Html.ActionLink("Læs", "Details", new {id = item.Id})
-        </td>
-    </tr>
-}
+                    Html.ActionLink("Delete", "Delete", "Admin", new {id = item.Id});
+                }
+
+                @Html.ActionLink("Læs", "Details", new {id = item.Id})
+            </td>
+        </tr>
+    }
 
 </table>

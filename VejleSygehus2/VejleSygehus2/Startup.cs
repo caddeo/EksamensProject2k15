@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using VejleSygehus2;
 
-[assembly: OwinStartupAttribute(typeof(VejleSygehus2.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace VejleSygehus2
 {
     public partial class Startup

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using VejleSygehus2.Models;
 
 namespace VejleSygehus2.Controllers
@@ -14,6 +10,7 @@ namespace VejleSygehus2.Controllers
             var article = new Article();
             return View(article);
         }
+
         [HttpPost]
         public ActionResult Create(Article article)
         {
