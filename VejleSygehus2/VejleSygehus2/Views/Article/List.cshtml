@@ -6,12 +6,15 @@
 
 <h2>List</h2>
 
-<p>
-    @if (Request.IsAuthenticated)
+
+    @if (Request.IsAuthenticated && User.IsInRole("canEdit"))
     {
-        Html.ActionLink("Create New", "Create");
+        <p>
+            @Html.ActionLink("Create New", "Create", "Admin")
+        </p>
     }
-</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -32,12 +35,13 @@
             @Html.DisplayFor(modelItem => item.Body)
         </td>
         <td>
-            @if (Request.IsAuthenticated)
+            @if (Request.IsAuthenticated && User.IsInRole("canEdit"))
             {
-                Html.ActionLink("Edit", "Edit", new {id = item.Id});
+                Html.ActionLink("Edit", "Edit", "Admin", new {id = item.Id});
                 
-                Html.ActionLink("Delete", "Delete", new {id = item.Id});
+                Html.ActionLink("Delete", "Delete", "Admin", new {id = item.Id});
             }
+
             @Html.ActionLink("Læs", "Details", new {id = item.Id})
         </td>
     </tr>
