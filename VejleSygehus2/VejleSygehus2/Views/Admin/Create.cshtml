@@ -10,6 +10,8 @@
 
 @using (Html.BeginForm("Create", "Admin", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
+
     @Html.EditorFor(article => article)
 
     <input type="submit" value="Opret"/>

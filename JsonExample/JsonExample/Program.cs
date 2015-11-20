@@ -83,7 +83,7 @@ namespace JsonExample
 
             // vi tager root folderen af projektet og den 
             // mappe json filerne skal være i (kaldet json) 
-            string directorypath = @root + "\\json\\";
+            string directorypath = root + "\\json\\";
 
             // tager inputtet og sørger for
             // at det bliver til en .json fil
@@ -103,8 +103,8 @@ namespace JsonExample
         public void CreateJson(string path, Product product)
         {
             // gem filen med navnet på stien
-            string json = JsonConvert.SerializeObject(product, Formatting.Indented);
-            File.WriteAllText(path, json);
+                string json = JsonConvert.SerializeObject(product, Formatting.Indented);
+                File.WriteAllText(path, json);
         }
 
         public Product LoadJson(string path)
