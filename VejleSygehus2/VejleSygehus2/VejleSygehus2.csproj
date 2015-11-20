@@ -178,7 +178,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
-    <Compile Include="Models\ArticleContext.cs" />
+    <Compile Include="Database\ArticleContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IArticle.cs" />
     <Compile Include="Models\IdentityModels.cs" />
