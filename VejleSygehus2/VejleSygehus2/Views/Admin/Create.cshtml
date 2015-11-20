@@ -14,5 +14,12 @@
 
     @Html.EditorFor(article => article)
 
-    <input type="submit" value="Opret"/>
+    <input type="submit" value="Opret" id="submitbutton"/>
 }
+
+<script>
+    $('#submitbutton').on("click", function () {
+        alert("fuck dig patrick");
+        $(this).prop( "disabled", true );
+    });
+</script>

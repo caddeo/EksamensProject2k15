@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using VejleSygehus2.Database;
 using VejleSygehus2.Models;
@@ -27,6 +28,10 @@ namespace VejleSygehus2.Controllers
 
             using (var db = new ArticleContext())
             {
+
+                // TODO : 
+                // Bruger skal ikke kunne trykke submit flere gange
+
                 db.Articles.Add(article);
                 db.SaveChanges();
             }
