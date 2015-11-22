@@ -628,7 +628,7 @@ jQuery.extend({
 		}
 	},
 
-	// Convert dashed to camelCase; used by the css and data modules
+	// ConvertToDto dashed to camelCase; used by the css and data modules
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
@@ -2995,7 +2995,7 @@ jQuery.contains = Sizzle.contains;
 // String to Object options format cache
 var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+// ConvertToDto String-formatted options into Object-formatted ones and store in cache
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
 	jQuery.each( options.match( core_rnotwhite ) || [], function( _, flag ) {
@@ -3028,7 +3028,7 @@ function createOptions( options ) {
  */
 jQuery.Callbacks = function( options ) {
 
-	// Convert options from String-formatted to Object-formatted if needed
+	// ConvertToDto options from String-formatted to Object-formatted if needed
 	// (we check in cache first)
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
@@ -6568,11 +6568,11 @@ jQuery.extend({
 				if ( jQuery.type( elem ) === "object" ) {
 					jQuery.merge( nodes, elem.nodeType ? [ elem ] : elem );
 
-				// Convert non-html into a text node
+				// ConvertToDto non-html into a text node
 				} else if ( !rhtml.test( elem ) ) {
 					nodes.push( context.createTextNode( elem ) );
 
-				// Convert html into DOM nodes
+				// ConvertToDto html into DOM nodes
 				} else {
 					tmp = tmp || safe.appendChild( context.createElement("div") );
 
@@ -7845,7 +7845,7 @@ jQuery.extend({
 		// Keys separate source (or catchall "*") and destination types with a single space
 		converters: {
 
-			// Convert anything to text
+			// ConvertToDto anything to text
 			"* text": String,
 
 			// Text to html (true = no transformation)
@@ -8030,7 +8030,7 @@ jQuery.extend({
 			);
 		}
 
-		// Convert data if not already a string
+		// ConvertToDto data if not already a string
 		if ( s.data && s.processData && typeof s.data !== "string" ) {
 			s.data = jQuery.param( s.data, s.traditional );
 		}
@@ -8195,7 +8195,7 @@ jQuery.extend({
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
 
-			// Convert no matter what (that way responseXXX fields are always set)
+			// ConvertToDto no matter what (that way responseXXX fields are always set)
 			response = ajaxConvert( s, response, jqXHR, isSuccess );
 
 			// If successful, handle type chaining
@@ -8377,7 +8377,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 	current = dataTypes.shift();
 
-	// Convert to each sequential dataType
+	// ConvertToDto to each sequential dataType
 	while ( current ) {
 
 		if ( s.responseFields[ current ] ) {
@@ -8399,7 +8399,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 				current = prev;
 
-			// Convert response if prev dataType is non-auto and differs from current
+			// ConvertToDto response if prev dataType is non-auto and differs from current
 			} else if ( prev !== "*" && prev !== current ) {
 
 				// Seek a direct converter

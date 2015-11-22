@@ -1,6 +1,7 @@
 using System.Data.Entity.Migrations;
 using VejleSygehus2.Database;
 using VejleSygehus2.Models;
+using VejleSygehus2.Service;
 
 namespace VejleSygehus2.Migrations
 {
@@ -13,16 +14,21 @@ namespace VejleSygehus2.Migrations
 
         protected override void Seed(ArticleContext context)
         {
-            var cat = new Category {Id = 1, Name = "First"};
-            context.Categories.AddOrUpdate(cat);
-            context.Articles.AddOrUpdate(new Article
+            var service = new JsonService();
+
+            var category = new Category {Id = 1, Name = "First"};
+            context.Categories.AddOrUpdate(category);
+
+            Article article = new Article
             {
                 Body = "dette er body",
-                Category = cat,
+                Category = category,
                 Header = "header",
                 Id = 1,
-                Path = "her"
-            });
+        };
+            article.Path = service.CreateJson(article);
+
+            context.Articles.AddOrUpdate(article);
             context.SaveChanges();
         }
     }

@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Web.Mvc;
 using VejleSygehus2.Database;
+using VejleSygehus2.Database.DTO;
 using VejleSygehus2.Models;
+using VejleSygehus2.Service;
 
 namespace VejleSygehus2.Controllers
 {
@@ -18,22 +20,25 @@ namespace VejleSygehus2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include= "Header, Body, Category")]Article article)
         {
-
-
-
             if (ModelState.IsValid)
             {
                 return View(article);
             }
 
+            // TODO : 
+            // Bruger skal ikke kunne trykke submit flere gange
             using (var db = new ArticleContext())
             {
+                var mediator = new Database.Article.Mediator();
 
-                // TODO : 
-                // Bruger skal ikke kunne trykke submit flere gange
+                JsonService service = new JsonService();
 
-                db.Articles.Add(article);
-                db.SaveChanges();
+                string path = service.CreateJson(article);
+                article.Path = path;
+
+                var entitydto = Service.Mappers.ArticleMapper.ConvertToDto(article);
+
+                mediator.Save(entitydto);
             }
 
             return RedirectToAction("List", "Article");
