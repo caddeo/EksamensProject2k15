@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using VejleSygehus2.Database;
 using VejleSygehus2.Models;
+using VejleSygehus2.Service;
 
 namespace VejleSygehus2.Controllers
 {
@@ -11,12 +12,25 @@ namespace VejleSygehus2.Controllers
         // GET: Article
         public ActionResult List()
         {
-            var articles = new List<Article>();
-            using (var db = new ArticleContext())
-            {
-                articles = db.Articles.ToList();
-            }
-            return View(articles);
+            var mediator = new Database.Article.Mediator();
+            var articles = mediator.List();
+            var entityarticles = new List<Models.Article>();
+
+            articles.ForEach(article => entityarticles.Add(
+                Service.Mappers.ArticleMapper
+                .ConvertToDto(article)));
+            return View(entityarticles);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var mediator = new Database.Article.Mediator();
+            var service = new Service.JsonService();
+
+            var entityarticles = mediator.Get(id);
+            var article = service.LoadJson(entityarticles.Path);
+
+            return View(article);
         }
     }
 }

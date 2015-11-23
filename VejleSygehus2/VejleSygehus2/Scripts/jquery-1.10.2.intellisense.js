@@ -250,7 +250,7 @@ intellisense.annotate(jQuery, {
   },
   'makeArray': function() {
     /// <signature>
-    ///   <summary>Convert an array-like object into a true JavaScript array.</summary>
+    ///   <summary>ConvertToDto an array-like object into a true JavaScript array.</summary>
     ///   <param name="obj" type="PlainObject">Any object to turn into a native Array.</param>
     ///   <returns type="Array" />
     /// </signature>

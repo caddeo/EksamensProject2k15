@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using VejleSygehus2.Models;
 
 namespace VejleSygehus2.Database
 {
@@ -13,8 +12,8 @@ namespace VejleSygehus2.Database
         {
         }
 
-        public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Models.Article> Articles { get; set; }
+        public virtual DbSet<Models.Category> Categories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
