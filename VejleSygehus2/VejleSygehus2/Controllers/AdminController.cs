@@ -36,9 +36,7 @@ namespace VejleSygehus2.Controllers
                 string path = service.CreateJson(article);
                 article.Path = path;
 
-                var entitydto = Service.Mappers.ArticleMapper.ConvertToDto(article);
-
-                mediator.Save(entitydto);
+                mediator.Save(article);
             }
 
             return RedirectToAction("List", "Article");

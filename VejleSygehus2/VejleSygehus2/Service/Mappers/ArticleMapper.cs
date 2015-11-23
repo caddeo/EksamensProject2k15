@@ -7,7 +7,7 @@ namespace VejleSygehus2.Service.Mappers
 {
     public static class ArticleMapper
     {
-        public static Models.Article ConvertToDto(Database.DTO.ArticleDto dto)
+        public static Models.Article ConverFromDto(Database.DTO.ArticleDto dto)
         {
             return new Models.Article()
             {
@@ -26,7 +26,6 @@ namespace VejleSygehus2.Service.Mappers
                 Id = article.Id,
                 Path = article.Path,
                 Header = article.Header,
-                Body = article.Body,
                 Category = article.Category
             };
         }
