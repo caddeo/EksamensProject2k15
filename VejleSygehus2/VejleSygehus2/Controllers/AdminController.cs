@@ -56,6 +56,7 @@ namespace VejleSygehus2.Controllers
         [HttpPost]
         public ActionResult Edit(Article article)
         {
+            /*lololl*/
             return View();
         }
     }
