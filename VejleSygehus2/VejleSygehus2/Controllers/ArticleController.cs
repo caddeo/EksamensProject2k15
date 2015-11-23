@@ -30,7 +30,7 @@ namespace VejleSygehus2.Controllers
             var entityarticles = mediator.Get(id);
             var article = service.LoadJson(entityarticles.Path);
 
-            return View(article);
+            return View(articles);
         }
     }
 }
