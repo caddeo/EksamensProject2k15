@@ -21,7 +21,6 @@ namespace VejleSygehus2.Controllers
                 .ConvertToDto(article)));
             return View(entityarticles);
         }
-
         public ActionResult Details(int id)
         {
             var mediator = new Database.Article.Mediator();
@@ -30,7 +29,7 @@ namespace VejleSygehus2.Controllers
             var entityarticles = mediator.Get(id);
             var article = service.LoadJson(entityarticles.Path);
 
-            return View(articles);
+            return View(article);
         }
     }
 }

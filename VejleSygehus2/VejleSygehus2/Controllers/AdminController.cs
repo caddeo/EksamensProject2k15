@@ -43,5 +43,22 @@ namespace VejleSygehus2.Controllers
 
             return RedirectToAction("List", "Article");
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var mediator = new Database.Article.Mediator();
+            var service = new Service.JsonService();
+
+            var entityarticle = mediator.Get(id);
+            var article = service.LoadJson(entityarticle.Path);
+
+            return View(article);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Article article)
+        {
+            return View();
+        }
     }
 }
