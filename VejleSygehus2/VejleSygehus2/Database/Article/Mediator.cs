@@ -13,13 +13,14 @@ namespace VejleSygehus2.Database.Article
             using (var db = new ArticleContext())
             {
                 return db.Articles
-                    .Select(article => /*new Database.DTO.ArticleDto()
+                    .Select(article =>  new Database.DTO.ArticleDto()
                     {
                         Id = article.Id,
                         Path = article.Path,
                         Header = article.Header,
-                    }*/
-                    Service.Mappers.ArticleMapper.ConvertToDto(article))
+                        Category = article.Category
+                    }
+                    /*Service.Mappers.ArticleMapper.ConvertToDto(article)*/)
                     .ToList();
             }       
         }
@@ -29,14 +30,14 @@ namespace VejleSygehus2.Database.Article
             using (var db = new ArticleContext())
             {
                  return db.Articles
-                    .Select(article => /*new Database.DTO.ArticleDto
+                    .Select(article => new Database.DTO.ArticleDto
                     {
                         Id = article.Id,
                         Path = article.Path,
                         Header = article.Header,
                         Category = article.Category
-                    }*/
-                    Service.Mappers.ArticleMapper.ConvertToDto(article))
+                    }
+                    /*Service.Mappers.ArticleMapper.ConvertToDto(article)*/)
                     .Where(a => a.Category.Id == category.Id)
                     .ToList();
             }
@@ -47,25 +48,24 @@ namespace VejleSygehus2.Database.Article
             using (var db = new ArticleContext())
             {
                 return db.Articles
-                    .Select(article => /*new Database.DTO.ArticleDto()
+                    .Select(article => new Database.DTO.ArticleDto()
                     {
                         Id = article.Id,
                         Path = article.Path,
                         Header = article.Header,
                         Category = article.Category
-                    }*/
-                    Service.Mappers.ArticleMapper.ConvertToDto(article))
+                    }
+                    /*Service.Mappers.ArticleMapper.ConvertToDto(article)*/)
                     .FirstOrDefault(a => a.Id == id);
             }
         }
 
-        public void Save(Database.DTO.ArticleDto articledto)
+        public void Save(Models.Article article)
         {
             using (var db = new ArticleContext())
             {
-                var article = Service.Mappers.ArticleMapper.ConvertToDto(articledto);
                 db.Articles.Add(article);
-                db.SaveChanges();
+                db.SaveChanges();   
             }
         }
     }

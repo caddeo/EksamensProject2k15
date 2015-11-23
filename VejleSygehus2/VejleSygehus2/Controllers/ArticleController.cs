@@ -18,7 +18,7 @@ namespace VejleSygehus2.Controllers
 
             articles.ForEach(article => entityarticles.Add(
                 Service.Mappers.ArticleMapper
-                .ConvertToDto(article)));
+                .ConverFromDto(article)));
             return View(entityarticles);
         }
 

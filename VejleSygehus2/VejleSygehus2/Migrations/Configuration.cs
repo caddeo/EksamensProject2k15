@@ -16,7 +16,7 @@ namespace VejleSygehus2.Migrations
         {
             var service = new JsonService();
 
-            var category = new Category {Id = 1, Name = "First"};
+            var category = new Category {Id = 2, Name = "First"};
             context.Categories.AddOrUpdate(category);
 
             Article article = new Article
