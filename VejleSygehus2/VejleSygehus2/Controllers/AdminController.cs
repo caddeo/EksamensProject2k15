@@ -18,9 +18,6 @@ namespace VejleSygehus2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include= "Header, Body, Category")]Article article)
         {
-
-
-
             if (ModelState.IsValid)
             {
                 return View(article);
