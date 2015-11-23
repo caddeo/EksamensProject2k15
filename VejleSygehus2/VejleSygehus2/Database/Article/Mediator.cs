@@ -21,7 +21,7 @@ namespace VejleSygehus2.Database.Article
                     }*/
                     Service.Mappers.ArticleMapper.ConvertToDto(article))
                     .ToList();
-            }       
+            }
         }
 
         public List<Database.DTO.ArticleDto> ListFromCategory(Models.Category category)
