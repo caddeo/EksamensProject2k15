@@ -29,7 +29,7 @@ namespace VejleSygehus2.Service
         public string CreateJson(Article article)
         {
             string path = GetPath(Guid.NewGuid().ToString());
-
+            article.Path = path;
             // Skal gøre så at den ikke har path og id med
             string json = JsonConvert.SerializeObject(article, Formatting.Indented);
             File.WriteAllText(path, json);

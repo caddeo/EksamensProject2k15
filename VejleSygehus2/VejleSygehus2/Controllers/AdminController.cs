@@ -56,8 +56,12 @@ namespace VejleSygehus2.Controllers
         [HttpPost]
         public ActionResult Edit(Article article)
         {
-            /*lololl*/
-            return View();
+            var mediator = new Database.Article.Mediator();
+            var service = new Service.JsonService();
+            
+            mediator.Update(article);
+            service.EditJson(article);
+            return RedirectToAction("List", "Article");
         }
     }
 }
