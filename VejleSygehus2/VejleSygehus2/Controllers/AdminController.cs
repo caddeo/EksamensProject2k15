@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using VejleSygehus2.Database;
@@ -44,13 +45,22 @@ namespace VejleSygehus2.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+           
             var mediator = new Database.Article.Mediator();
             var service = new Service.JsonService();
+            var viewObject = new Database.DTO.ViewObject();
+            foreach (Database.DTO.CategoryDTO dto in mediator.GetCategories())
+            {
+               
+   
+                viewObject.CategoryList.Add(new SelectListItem() {Text = Service.Mappers.CategoryMapper.ConverFromDto(dto).Name });
+            }
 
             var entityarticle = mediator.Get(id);
             var article = service.LoadJson(entityarticle.Path);
+            viewObject.Article = article;
 
-            return View(article);
+            return View(viewObject);
         }
 
         [HttpPost]
