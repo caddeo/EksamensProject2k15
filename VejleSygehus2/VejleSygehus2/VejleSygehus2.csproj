@@ -175,8 +175,6 @@
     <Compile Include="Database\ArticleContext.cs" />
     <Compile Include="Database\Article\Mediator.cs" />
     <Compile Include="Database\DTO\ArticleDTO.cs" />
-    <Compile Include="Database\DTO\CategoryDTO.cs" />
-    <Compile Include="Database\DTO\ViewObject.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,7 +191,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\JsonService.cs" />
-    <Compile Include="Service\Mappers\CategoryMapper.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
