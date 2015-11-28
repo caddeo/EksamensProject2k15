@@ -1,0 +1,11 @@
+﻿@model VejleSygehus2.Models.CreateArticleViewModel
+
+@Html.LabelFor(model => model.Article.Header)
+@Html.TextBoxFor(model => model.Article.Header)
+
+@Html.LabelFor(model => model.Article.Body)
+@Html.TextBoxFor(model => model.Article.Body)
+
+@Html.LabelFor(model => model.Article.Category)
+@Html.DropDownListFor(model => model.Article.Category, Model.Categories)
+

@@ -13,7 +13,11 @@ namespace VejleSygehus2.Controllers
     {
         public ActionResult Create()
         {
-            var article = new Article();
+            var mediator = new Database.Article.Mediator();
+            var article = new CreateArticleViewModel();
+
+            article.Categories = mediator.GetAllCategories();
+
             return View(article);
         }
 

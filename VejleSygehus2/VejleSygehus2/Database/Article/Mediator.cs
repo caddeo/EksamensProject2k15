@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
+using System.Web.Mvc;
 
 namespace VejleSygehus2.Database.Article
 {
@@ -69,6 +70,7 @@ namespace VejleSygehus2.Database.Article
                 db.SaveChanges();   
             }
         }
+
         public void Update(Models.Article article)
         {
             using (var db = new ArticleContext())
@@ -80,5 +82,24 @@ namespace VejleSygehus2.Database.Article
             
             }
         }
+
+        /* Evt. burde vi at lave en fil der hedder Mediator (ikke i en mappe der hedder article)
+        og så kan vi lave forskellige klasse i.e. articlemediator categorymediator */
+        public List<SelectListItem> GetAllCategories()
+        {
+            using (var db = new ArticleContext())
+            {
+                var categories = db.Categories
+                    .Select(c => 
+                    new SelectListItem
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    });
+
+                return new SelectList(categories, "Value", "Text").ToList();
+            }
+        }
+
     }
 }
