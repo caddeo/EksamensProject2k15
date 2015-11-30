@@ -1,12 +1,15 @@
 ﻿@model VejleSygehus2.Models.CreateArticleViewModel
 
-@Html.LabelFor(model => model.Article.Header)
-@Html.TextBoxFor(model => model.Article.Header)
+<div>
+    @Html.LabelFor(model => model.Article.Header)
+    @Html.TextBoxFor(model => model.Article.Header)
+</div>
 
-@Html.LabelFor(model => model.Article.Body)
-@Html.TextBoxFor(model => model.Article.Body)
+<div>
+    @Html.LabelFor(model => model.Article.Body)
+    @Html.TextAreaFor(model => model.Article.Body, new { @class = "artikel-body" })
+</div>
 
-@Html.LabelFor(model => model.Article.Category)
 
 @{
     var items = new List<SelectListItem>();
@@ -20,4 +23,7 @@
     }
 }
 
-@Html.DropDownListFor(model => model.SelectedCategory, items)
+<div>
+    @Html.LabelFor(model => model.Article.Category)
+    @Html.DropDownListFor(model => model.SelectedCategory, items)
+</div>
