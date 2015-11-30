@@ -23,12 +23,13 @@ namespace VejleSygehus2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include= "Header, Body, Category")]Article article)
+        public ActionResult Create(CreateArticleViewModel viewmodel)
         {
-            if (ModelState.IsValid)
+            var article = viewmodel.Article;
+            /*if (ModelState.IsValid)
             {
-                return View(article);
-            }
+                return View(viewmodel);
+            }*/
 
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
@@ -41,11 +42,14 @@ namespace VejleSygehus2.Controllers
                 string path = service.CreateJson(article);
                 article.Path = path;
 
+                article.Category = mediator.GetAllCategories().FirstOrDefault(x => x.Id == int.Parse(viewmodel.SelectedCategory));
+
                 mediator.Save(article);
             }
 
             return RedirectToAction("List", "Article");
         }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -67,6 +71,7 @@ namespace VejleSygehus2.Controllers
             
             mediator.Update(article);
             service.EditJson(article);
+
             return RedirectToAction("List", "Article");
         }
     }

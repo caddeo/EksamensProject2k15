@@ -7,5 +7,17 @@
 @Html.TextBoxFor(model => model.Article.Body)
 
 @Html.LabelFor(model => model.Article.Category)
-@Html.DropDownListFor(model => model.Article.Category, Model.Categories)
 
+@{
+    var items = new List<SelectListItem>();
+    foreach (var category in Model.Categories)
+    {
+        items.Add(new SelectListItem
+        {
+            Text = category.Name,
+            Value = category.Id.ToString()
+        });
+    }
+}
+
+@Html.DropDownListFor(model => model.SelectedCategory, items)

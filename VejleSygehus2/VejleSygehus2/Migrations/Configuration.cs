@@ -16,10 +16,10 @@ namespace VejleSygehus2.Migrations
         {
             var service = new JsonService();
 
-            var firstcategory = new Category {Id = 2, Name = "First"};
+            var firstcategory = new Category {Id = 1, Name = "First"};
             context.Categories.AddOrUpdate(firstcategory);
 
-            var secondcategory = new Category { Id = 3, Name = "Second" };
+            var secondcategory = new Category { Id = 2, Name = "Second" };
             context.Categories.AddOrUpdate(secondcategory);
 
             Article article = new Article

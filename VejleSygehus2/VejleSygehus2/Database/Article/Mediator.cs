@@ -85,19 +85,11 @@ namespace VejleSygehus2.Database.Article
 
         /* Evt. burde vi at lave en fil der hedder Mediator (ikke i en mappe der hedder article)
         og så kan vi lave forskellige klasse i.e. articlemediator categorymediator */
-        public List<SelectListItem> GetAllCategories()
+        public List<Models.Category> GetAllCategories()
         {
             using (var db = new ArticleContext())
             {
-                var categories = db.Categories
-                    .Select(c => 
-                    new SelectListItem
-                    {
-                        Value = c.Id.ToString(),
-                        Text = c.Name
-                    });
-
-                return new SelectList(categories, "Value", "Text").ToList();
+                return db.Categories.ToList();
             }
         }
 

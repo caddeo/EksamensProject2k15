@@ -26,7 +26,7 @@ namespace VejleSygehus2.Service
 
             return path;
         }
-        public string CreateJson(Article article)
+        public string CreateJson(Article article, string custompath = "")
         {
             string path = GetPath(Guid.NewGuid().ToString());
             article.Path = path;

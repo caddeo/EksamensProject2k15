@@ -8,7 +8,9 @@ namespace VejleSygehus2.Models
 {
     public class CreateArticleViewModel
     {
+
         public Article Article { get; set; }
-        public List<SelectListItem> Categories { get; set; }
+        public List<Category> Categories { get; set; }
+        public string SelectedCategory { get; set; }
     }
 }
