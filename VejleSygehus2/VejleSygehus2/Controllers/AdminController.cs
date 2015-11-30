@@ -13,7 +13,11 @@ namespace VejleSygehus2.Controllers
     {
         public ActionResult Create()
         {
-            var article = new Article();
+            var mediator = new Database.Article.Mediator();
+            var article = new CreateArticleViewModel();
+
+            article.Categories = mediator.GetAllCategories();
+
             return View(article);
         }
 
@@ -48,19 +52,11 @@ namespace VejleSygehus2.Controllers
            
             var mediator = new Database.Article.Mediator();
             var service = new Service.JsonService();
-            var viewObject = new Database.DTO.ViewObject();
-            foreach (Database.DTO.CategoryDTO dto in mediator.GetCategories())
-            {
-               
-   
-                viewObject.CategoryList.Add(new SelectListItem() {Text = Service.Mappers.CategoryMapper.ConverFromDto(dto).Name });
-            }
 
             var entityarticle = mediator.Get(id);
             var article = service.LoadJson(entityarticle.Path);
-            viewObject.Article = article;
 
-            return View(viewObject);
+            return View(article);
         }
 
         [HttpPost]

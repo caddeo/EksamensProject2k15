@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
+using System.Web.Mvc;
 
 namespace VejleSygehus2.Database.Article
 {
@@ -63,34 +64,15 @@ namespace VejleSygehus2.Database.Article
 
         public void Save(Models.Article article)
         {
-            List<Database.DTO.CategoryDTO> list = GetCategories();
-
-            foreach (Database.DTO.CategoryDTO cat in list)
-            {
-                if (cat.Name == article.Category.Name)
-                {
-                    article.Category.Id = cat.Id;
-                }
-            }
-
             using (var db = new ArticleContext())
             {
                 db.Articles.Add(article);
                 db.SaveChanges();   
             }
         }
+
         public void Update(Models.Article article)
         {
-            List<Database.DTO.CategoryDTO> list = GetCategories();
-
-            foreach (Database.DTO.CategoryDTO cat in list)
-            {
-                if (cat.Name == article.Category.Name)
-                {
-                    article.Category.Id = cat.Id;
-                }
-            }
-
             using (var db = new ArticleContext())
             {
                 var _article = db.Articles.FirstOrDefault(a => a.Id == article.Id);
@@ -100,17 +82,24 @@ namespace VejleSygehus2.Database.Article
             
             }
         }
-        public List<Database.DTO.CategoryDTO> GetCategories()
+
+        /* Evt. burde vi at lave en fil der hedder Mediator (ikke i en mappe der hedder article)
+        og så kan vi lave forskellige klasse i.e. articlemediator categorymediator */
+        public List<SelectListItem> GetAllCategories()
         {
             using (var db = new ArticleContext())
             {
-                return db.Categories
-                    .Select(category => new Database.DTO.CategoryDTO()
+                var categories = db.Categories
+                    .Select(c => 
+                    new SelectListItem
                     {
-                        Id = category.Id,
-                        Name = category.Name
-                    }).ToList();                    
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    });
+
+                return new SelectList(categories, "Value", "Text").ToList();
             }
         }
+
     }
 }
