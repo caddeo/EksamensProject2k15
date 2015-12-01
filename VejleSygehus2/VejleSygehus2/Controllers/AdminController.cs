@@ -14,27 +14,28 @@ namespace VejleSygehus2.Controllers
         public ActionResult Create()
         {
             var mediator = new Database.Article.Mediator();
-            var article = new CreateArticleViewModel();
+            var article = new Article();
 
-            article.Categories = mediator.GetAllCategories();
+            var items = mediator.GetAllCategories().Select(category => new SelectListItem
+            {
+                Text = category.Name, Value = category.Id.ToString()
+            }).ToList();
+
+            ViewBag.CategoryItems = items;
 
             return View(article);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateArticleViewModel viewmodel)
+        public ActionResult Create(Article article)
         {
-            var article = viewmodel.Article;
-            /*if (ModelState.IsValid)
-            {
-                return View(viewmodel);
-            }*/
-
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
             using (var db = new ArticleContext())
             {
+                int categoryid = article.CategoryId;
+
                 var mediator = new Database.Article.Mediator();
 
                 JsonService service = new JsonService();
@@ -42,7 +43,9 @@ namespace VejleSygehus2.Controllers
                 string path = service.CreateJson(article);
                 article.Path = path;
 
-                article.Category = mediator.GetAllCategories().FirstOrDefault(x => x.Id == int.Parse(viewmodel.SelectedCategory));
+                var category = mediator.GetAllCategories().First(x => x.Id == categoryid);
+
+                article.CategoryId = category.Id;
 
                 mediator.Save(article);
             }

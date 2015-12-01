@@ -55,10 +55,9 @@ namespace VejleSygehus2.Database.Article
                         Path = article.Path,
                         Header = article.Header,
                         Category = article.Category
-
                     }
                     /*Service.Mappers.ArticleMapper.ConvertToDto(article)*/)
-                    .FirstOrDefault(a => a.Id == id);
+                    .First(a => a.Id == id);
             }
         }
 
@@ -75,9 +74,9 @@ namespace VejleSygehus2.Database.Article
         {
             using (var db = new ArticleContext())
             {
-                var _article = db.Articles.FirstOrDefault(a => a.Id == article.Id);
-                _article.Header = article.Header;
-                _article.Category = article.Category;
+                var newarticle = db.Articles.FirstOrDefault(a => a.Id == article.Id);
+                newarticle.Header = article.Header;
+                newarticle.Category = article.Category;
                 db.SaveChanges();
             
             }

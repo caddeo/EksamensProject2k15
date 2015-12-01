@@ -1,4 +1,5 @@
 using System.Data.Entity.Migrations;
+using System.Linq;
 using VejleSygehus2.Database;
 using VejleSygehus2.Models;
 using VejleSygehus2.Service;
@@ -16,11 +17,18 @@ namespace VejleSygehus2.Migrations
         {
             var service = new JsonService();
 
-            var firstcategory = new Category {Id = 1, Name = "First"};
-            context.Categories.AddOrUpdate(firstcategory);
+            var firstcategory = new Category { Id = 1, Name = "First" };
+            if (context.Categories.FirstOrDefault(x => x.Name == firstcategory.Name) == null)
+            {
+                context.Categories.Add(firstcategory);
+            }
 
             var secondcategory = new Category { Id = 2, Name = "Second" };
-            context.Categories.AddOrUpdate(secondcategory);
+            if (context.Categories.FirstOrDefault(x => x.Name == secondcategory.Name) == null)
+            {
+
+                context.Categories.Add(secondcategory);
+            }
 
             Article article = new Article
             {
@@ -28,10 +36,14 @@ namespace VejleSygehus2.Migrations
                 Category = firstcategory,
                 Header = "header",
                 Id = 1,
-        };
+            };
             article.Path = service.CreateJson(article);
 
-            context.Articles.AddOrUpdate(article);
+            if (context.Articles.FirstOrDefault(x => x.Header == article.Header) == null)
+            {
+                context.Articles.Add(article);
+            }
+
             context.SaveChanges();
         }
     }

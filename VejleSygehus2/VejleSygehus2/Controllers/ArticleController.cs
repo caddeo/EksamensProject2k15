@@ -14,13 +14,15 @@ namespace VejleSygehus2.Controllers
         {
             var mediator = new Database.Article.Mediator();
             var articles = mediator.List();
-            var entityarticles = new List<Models.Article>();
 
+            var entityarticles = new List<Models.Article>();
             articles.ForEach(article => entityarticles.Add(
                 Service.Mappers.ArticleMapper
                 .ConverFromDto(article)));
+
             return View(entityarticles);
         }
+
         public ActionResult Details(int id)
         {
             var mediator = new Database.Article.Mediator();
