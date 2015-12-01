@@ -32,25 +32,27 @@ namespace VejleSygehus2.Controllers
         {
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
-            using (var db = new ArticleContext())
+
+
+            var mediator = new Database.Article.Mediator();
+            int categoryid = article.CategoryId;
+            var category = mediator.GetAllCategories().First(x => x.Id == categoryid);
+            article.CategoryId = category.Id;
+
+            if (ModelState.IsValid)
             {
-                int categoryid = article.CategoryId;
-
-                var mediator = new Database.Article.Mediator();
-
                 JsonService service = new JsonService();
 
                 string path = service.CreateJson(article);
                 article.Path = path;
 
-                var category = mediator.GetAllCategories().First(x => x.Id == categoryid);
-
-                article.CategoryId = category.Id;
-
                 mediator.Save(article);
+
+                return RedirectToAction("List", "Article");
             }
 
-            return RedirectToAction("List", "Article");
+            ViewBag.Error = "Kan ikke oprette";
+            return View(article);
         }
 
         [HttpGet]

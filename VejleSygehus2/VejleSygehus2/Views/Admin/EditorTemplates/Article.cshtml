@@ -1,6 +1,15 @@
 ﻿@model VejleSygehus2.Models.Article
 
 <div>
+    @{
+        if (ViewBag.Error != null)
+        {
+            @ViewBag.Error
+        }
+    }
+</div>
+
+<div>
     @Html.LabelFor(model => model.Header)
     @Html.TextBoxFor(model => model.Header)
 </div>
