@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VejleSygehus2", "VejleSygeh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{C96C3C14-45A7-4835-A3FC-B350DB3E437D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VejleSygehusAPI2", "VejleSygehusAPI2\VejleSygehusAPI2.csproj", "{C44FE835-F4D9-4B34-9923-1184410E59CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C96C3C14-45A7-4835-A3FC-B350DB3E437D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C96C3C14-45A7-4835-A3FC-B350DB3E437D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C96C3C14-45A7-4835-A3FC-B350DB3E437D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44FE835-F4D9-4B34-9923-1184410E59CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44FE835-F4D9-4B34-9923-1184410E59CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44FE835-F4D9-4B34-9923-1184410E59CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44FE835-F4D9-4B34-9923-1184410E59CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
