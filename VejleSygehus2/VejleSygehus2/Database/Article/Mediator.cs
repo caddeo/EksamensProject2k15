@@ -74,9 +74,11 @@ namespace VejleSygehus2.Database.Article
         {
             using (var db = new ArticleContext())
             {
-                var newarticle = db.Articles.FirstOrDefault(a => a.Id == article.Id);
+                var newarticle = db.Articles.First(a => a.Id == article.Id);
+
                 newarticle.Header = article.Header;
                 newarticle.Category = article.Category;
+
                 db.SaveChanges();
             
             }

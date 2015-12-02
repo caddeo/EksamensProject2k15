@@ -11,6 +11,7 @@ namespace VejleSygehus2.Controllers
 {
     public class AdminController : Controller
     {
+        [HttpGet]
         public ActionResult Create()
         {
             var mediator = new Database.Article.Mediator();
@@ -33,15 +34,26 @@ namespace VejleSygehus2.Controllers
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
 
-
             var mediator = new Database.Article.Mediator();
+            
+            #region itemsrep
+            // skal finde en anden løsning, evt. et repository
+            var items = mediator.GetAllCategories().Select(cat => new SelectListItem
+            {
+                Text = cat.Name,
+                Value = cat.Id.ToString()
+            }).ToList();
+
+            ViewBag.CategoryItems = items;
+            #endregion
+
             int categoryid = article.CategoryId;
             var category = mediator.GetAllCategories().First(x => x.Id == categoryid);
             article.CategoryId = category.Id;
 
             if (ModelState.IsValid)
             {
-                JsonService service = new JsonService();
+                var service = new JsonService();
 
                 string path = service.CreateJson(article);
                 article.Path = path;
@@ -52,6 +64,7 @@ namespace VejleSygehus2.Controllers
             }
 
             ViewBag.Error = "Kan ikke oprette";
+
             return View(article);
         }
 

@@ -1,25 +1,16 @@
 ﻿@model VejleSygehus2.Models.Article
 
 <div>
-    @{
-        if (ViewBag.Error != null)
-        {
-            @ViewBag.Error
-        }
-    }
-</div>
-
-<div>
     @Html.LabelFor(model => model.Header)
     @Html.TextBoxFor(model => model.Header)
 </div>
 
 <div>
     @Html.LabelFor(model => model.Body)
-    @Html.TextAreaFor(model => model.Body, new { @class = "artikel-body" })
+    @Html.TextAreaFor(model => model.Body, new {@class = "artikel-body"})
 </div>
 
 <div>
     @Html.LabelFor(model => model.Category)
     @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryItems as List<SelectListItem>)
-</div>
+</div>  

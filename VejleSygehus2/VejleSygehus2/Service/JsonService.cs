@@ -26,21 +26,28 @@ namespace VejleSygehus2.Service
 
             return path;
         }
-        public string CreateJson(Article article, string custompath = "")
+
+        public string CreateJson(Article article, string path = "")
         {
-            string path = GetPath(Guid.NewGuid().ToString());
+            if (path == "")
+            {
+                path = GetPath(Guid.NewGuid().ToString());
+            }
+
             article.Path = path;
-            // Skal gøre så at den ikke har path og id med
+
             string json = JsonConvert.SerializeObject(article, Formatting.Indented);
             File.WriteAllText(path, json);
             
             return path;
         }
+
         public void EditJson(Article article)
         {
             string json = JsonConvert.SerializeObject(article, Formatting.Indented);
             File.WriteAllText(article.Path, json);
         }
+
         public Article LoadJson(string path)
         {
             Article deserializedArticle;
@@ -60,6 +67,7 @@ namespace VejleSygehus2.Service
 
             return deserializedArticle;
         }
+
         public void DeleteJson(Article article)
         {
             try
