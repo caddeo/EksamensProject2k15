@@ -4,6 +4,12 @@ using System.Web.Mvc;
 
 namespace VejleSygehus2.Models
 {
+    public class User
+    {
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        public bool Admin { get; set; }
+    }
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

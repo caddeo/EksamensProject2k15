@@ -9,12 +9,13 @@ using VejleSygehus2.Service;
 
 namespace VejleSygehus2.Controllers
 {
+    [Authorize(Roles = "canEdit")]
     public class AdminController : Controller
     {
         [HttpGet]
         public ActionResult Create()
         {
-            var mediator = new Database.Article.Mediator();
+            var mediator = new Database.CategoryMediator();
             var article = new Article();
 
             var items = mediator.GetAllCategories().Select(category => new SelectListItem
@@ -29,16 +30,17 @@ namespace VejleSygehus2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Article article)
+        public ActionResult Create([Bind(Include = "Header, Body, Category")] Article article)
         {
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
 
-            var mediator = new Database.Article.Mediator();
+            var categorymediator = new Database.CategoryMediator();
+            var articlemediator = new ArticleMediator();
             
             #region itemsrep
             // skal finde en anden løsning, evt. et repository
-            var items = mediator.GetAllCategories().Select(cat => new SelectListItem
+            var items = categorymediator.GetAllCategories().Select(cat => new SelectListItem
             {
                 Text = cat.Name,
                 Value = cat.Id.ToString()
@@ -48,7 +50,7 @@ namespace VejleSygehus2.Controllers
             #endregion
 
             int categoryid = article.CategoryId;
-            var category = mediator.GetAllCategories().First(x => x.Id == categoryid);
+            var category = categorymediator.GetAllCategories().First(x => x.Id == categoryid);
             article.CategoryId = category.Id;
 
             if (ModelState.IsValid)
@@ -58,7 +60,7 @@ namespace VejleSygehus2.Controllers
                 string path = service.CreateJson(article);
                 article.Path = path;
 
-                mediator.Save(article);
+                articlemediator.Save(article);
 
                 return RedirectToAction("List", "Article");
             }
@@ -72,7 +74,7 @@ namespace VejleSygehus2.Controllers
         public ActionResult Edit(int id)
         {
            
-            var mediator = new Database.Article.Mediator();
+            var mediator = new Database.ArticleMediator();
             var service = new Service.JsonService();
 
             var entityarticle = mediator.Get(id);
@@ -82,15 +84,22 @@ namespace VejleSygehus2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Article article)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Header, Body, Category")] Article article)
         {
-            var mediator = new Database.Article.Mediator();
+            var mediator = new Database.ArticleMediator();
             var service = new Service.JsonService();
             
             mediator.Update(article);
             service.EditJson(article);
 
             return RedirectToAction("List", "Article");
+        }
+
+        [HttpGet]
+        public ActionResult ListUsers()
+        {
+            return View();
         }
     }
 }

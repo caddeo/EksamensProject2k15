@@ -12,7 +12,7 @@ namespace VejleSygehus2.Controllers
         // GET: Article
         public ActionResult List()
         {
-            var mediator = new Database.Article.Mediator();
+            var mediator = new Database.ArticleMediator();
             var articles = mediator.List();
 
             var entityarticles = new List<Models.Article>();
@@ -25,7 +25,7 @@ namespace VejleSygehus2.Controllers
 
         public ActionResult Details(int id)
         {
-            var mediator = new Database.Article.Mediator();
+            var mediator = new Database.ArticleMediator();
             var service = new Service.JsonService();
 
             var entityarticles = mediator.Get(id);
