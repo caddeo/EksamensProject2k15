@@ -10,6 +10,7 @@ using VejleSygehus2.Service;
 namespace VejleSygehus2.Controllers
 {
     [Authorize(Roles = "canEdit")]
+    
     public class AdminController : Controller
     {
         [HttpGet]
@@ -97,9 +98,29 @@ namespace VejleSygehus2.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListUsers()
+        public ActionResult ListUsers(string message = null)
         {
-            return View();
+            ViewBag.Message = message;
+
+            var mediator = new AccountMediator();
+
+            return View(mediator.ListUsers());
+        }
+
+        public ActionResult AddUserAsAdmin(string email)
+        {
+            var mediator = new AccountMediator();
+            mediator.AddUserAsAdmin(email);
+
+            return RedirectToAction("ListUsers", new {message = email+" added"});
+        }
+
+        public ActionResult RemoveUser(string email)
+        {
+            var mediator = new AccountMediator();
+            mediator.RemoveUser(email);
+
+            return RedirectToAction("ListUsers", new {message = email+" deleted"});
         }
     }
 }

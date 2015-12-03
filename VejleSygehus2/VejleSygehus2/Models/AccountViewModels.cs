@@ -6,6 +6,7 @@ namespace VejleSygehus2.Models
 {
     public class User
     {
+        [Key]
         [Display(Name = "Email")]
         public string Email { get; set; }
         public bool Admin { get; set; }

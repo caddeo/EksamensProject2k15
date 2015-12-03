@@ -1,0 +1,47 @@
+﻿@model IEnumerable<VejleSygehus2.Models.User>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+@{
+    if (ViewBag.Message != null)
+    {
+        @ViewBag.Message
+    }
+}
+
+<h2>ListUsers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayText("Admin")
+        </th>
+        <th>
+            @Html.DisplayText("Remove")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Make admin", "AddUserAsAdmin", new {email = item.Email})
+        </td>
+        <td>
+            @Html.ActionLink("Remove user", "RemoveUser", new { email = item.Email })
+        </td>
+    </tr>
+}
+
+</table>

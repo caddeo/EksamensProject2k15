@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.DynamicData;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 using VejleSygehus2.Models;
 
 namespace VejleSygehus2.Database
@@ -111,7 +112,7 @@ namespace VejleSygehus2.Database
                     .Select(user => new User()
                     {
                         Email = user.Email,
-                        Admin = Roles.IsUserInRole("canEdit")
+                        Admin = true
                     })
                     .ToList();
             }
@@ -119,7 +120,14 @@ namespace VejleSygehus2.Database
 
         public void AddUserAsAdmin(string email)
         {
-            Roles.AddUserToRole(email, "canEdit");
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Users.First(x => x.Email == email);
+                var role = new IdentityRole("canEdit");
+                db.Roles.Add(role);
+                role = db.Roles.First(x => x.Name == role.Name);
+                user.Roles.Add(new IdentityUserRole() { RoleId = role.Id, UserId = user.Id});
+            }
         }
 
         public void RemoveUser(string email)
@@ -127,6 +135,7 @@ namespace VejleSygehus2.Database
             using (var db = new ApplicationDbContext())
             {
                 var user = db.Users.First(x => x.Email == email);
+
                 db.Users.Remove(user);
             }
         }

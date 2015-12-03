@@ -11,6 +11,6 @@ namespace VejleSygehus2.Database.DTO
         public string Path { get; set; }
         public string Header { get; set; }
         public string Body { get; set; }
-        public Models.Category Category { get; set; }//asasas
+        public Models.Category Category { get; set; }
     }
 }

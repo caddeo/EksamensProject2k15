@@ -8,7 +8,7 @@ namespace VejleSygehus2.Database
 {
     public class ArticleContext : DbContext
     {
-        public ArticleContext() : base("ArticleContext")
+        public ArticleContext() : base("DefaultConnection")
         {
         }
 
