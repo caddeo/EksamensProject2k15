@@ -5,6 +5,7 @@ using VejleSygehus2.Database;
 using VejleSygehus2.Models;
 using VejleSygehus2.Service;
 
+
 namespace VejleSygehus2.Controllers
 {
     public class ArticleController : Controller
@@ -25,11 +26,11 @@ namespace VejleSygehus2.Controllers
 
         public ActionResult Details(int id)
         {
-            var mediator = new Database.ArticleMediator();
-            var service = new Service.JsonService();
+            var mediator = new ArticleMediator();
+            var service = new ApiService();
 
             var entityarticles = mediator.Get(id);
-            var article = service.LoadJson(entityarticles.Path);
+            var article = service.GetArticle(entityarticles.Path);
 
             return View(article);
         }
