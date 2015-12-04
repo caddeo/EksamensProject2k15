@@ -7,13 +7,13 @@ namespace VejleSygehus2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class startup : IMigrationMetadata
+    public sealed partial class dbchange : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(startup));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dbchange));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511250936116_startup"; }
+            get { return "201512040902365_dbchange"; }
         }
         
         string IMigrationMetadata.Source
