@@ -13,6 +13,11 @@ namespace VejleSygehus2.Controllers
     
     public class AdminController : Controller
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -31,14 +36,14 @@ namespace VejleSygehus2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Header, Body, Category")] Article article)
+        public ActionResult Create([Bind(Include = "Header, Body, CategoryId")] Article article)
         {
             // TODO : 
             // Bruger skal ikke kunne trykke submit flere gange
 
             var categorymediator = new Database.CategoryMediator();
             var articlemediator = new ArticleMediator();
-            
+
             #region itemsrep
             // skal finde en anden løsning, evt. et repository
             var items = categorymediator.GetAllCategories().Select(cat => new SelectListItem
@@ -50,7 +55,7 @@ namespace VejleSygehus2.Controllers
             ViewBag.CategoryItems = items;
             #endregion
 
-            int categoryid = article.CategoryId;
+            var categoryid = article.CategoryId;
             var category = categorymediator.GetAllCategories().First(x => x.Id == categoryid);
             article.CategoryId = category.Id;
 

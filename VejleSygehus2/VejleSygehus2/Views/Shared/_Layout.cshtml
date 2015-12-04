@@ -38,7 +38,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.Year - @Html.ActionLink("Admin", "Index", "Admin") @{if (Request.IsAuthenticated){@Html.ActionLink("Log ud", "LogOff", "Account");}}</p>
+        <p>&copy; @DateTime.Now.Year - @Html.ActionLink("Admin", "Index", "Admin")</p>
     </footer>
 </div>
 @Scripts.Render("~/bundles/jquery")
